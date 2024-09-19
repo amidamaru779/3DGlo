@@ -1,5 +1,5 @@
 const message = () => {
-    let date = new Date();
+    const date = new Date();
     const weekdays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
     const weekday = weekdays[date.getDay()]
 
@@ -8,8 +8,8 @@ const message = () => {
     const timeNow = document.getElementById('time-now')
     const timeToHappyNewYear = document.getElementById('time-to-happy-new-year')
     const getTime = () => {
-        let dateStop = new Date('1 janury 2025').getTime()
-        let dateNow = new Date().getTime()
+        const dateStop = new Date('1 janury 2025').getTime()
+        const dateNow = new Date().getTime()
 
         let timeRemaining = Math.floor((dateStop - dateNow) / 1000)
         let hours = new Date().getHours()
