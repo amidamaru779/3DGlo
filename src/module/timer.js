@@ -1,4 +1,3 @@
-'use strict'
 const timer = (deadLine) => {
     const timerHours = document.getElementById('timer-hours')
     const timerMinutes = document.getElementById('timer-minutes')
@@ -6,8 +5,8 @@ const timer = (deadLine) => {
     const timerDays = document.getElementById('timer-days')
 
     const getTimeRemaining = () => {
-        let dateStop = new Date(deadLine).getTime()
-        let dateNow = new Date().getTime()
+        const dateStop = new Date(deadLine).getTime()
+        const dateNow = new Date().getTime()
 
         let timeRemaining = (dateStop - dateNow) / 1000
         if (timeRemaining < 0) {
@@ -36,17 +35,11 @@ const timer = (deadLine) => {
         timerHours.textContent = getTime.hours
         timerMinutes.textContent = getTime.minutes
         timerSeconds.textContent = getTime.seconds
-        stopClock(getTime)
-
-    }
-    const stopClock = (getTime) => {
         if (getTime.timeRemaining === 0) {
             clearInterval(updateClock)
-        } else {
-            setInterval(updateClock, 1000)
         }
     }
-    updateClock()
+    setInterval(updateClock, 1000)
 
 }
 export default timer

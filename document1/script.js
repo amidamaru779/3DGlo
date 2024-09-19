@@ -1,6 +1,5 @@
-'use strict'
 const message = () => {
-    const date = new Date();
+    let date = new Date();
     const weekdays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
     const weekday = weekdays[date.getDay()]
 
@@ -13,9 +12,9 @@ const message = () => {
         let dateNow = new Date().getTime()
 
         let timeRemaining = Math.floor((dateStop - dateNow) / 1000)
-        let hours = date.getHours()
-        let minutes = date.getMinutes()
-        let seconds = date.getSeconds()
+        let hours = new Date().getHours()
+        let minutes = new Date().getMinutes()
+        let seconds = new Date().getSeconds()
 
         hours = hours < 10 ? "0" + hours : hours
         minutes = minutes < 10 ? "0" + minutes : minutes
@@ -29,14 +28,15 @@ const message = () => {
     }
     const getTimeOfDay = () => {
         let timeOfDay
-        if (3 < getTime.hours && getTime.hours < 9) {
+        if (3 < getTime().hours && getTime().hours < 9) {
             timeOfDay = "Доброе утро"
-        } else if (10 < getTime.hours && getTime.hours < 15) {
+        } else if (10 < getTime().hours && getTime().hours < 15) {
             timeOfDay = "Добрый день"
-        } else if (15 <= getTime.hours && getTime.hours < 21) {
+        } else if (15 < getTime().hours && getTime().hours < 21) {
             timeOfDay = "Добрый вечер"
-        } else
+        } else {
             timeOfDay = "Доброй ночи"
+        }
         return timeOfDay
     }
     const roadToHny = () => {
@@ -62,6 +62,6 @@ const message = () => {
         timeNow.textContent = `Текущее время: ${getTime().hours}:${getTime().minutes}:${getTime().seconds} PM`
         timeToHappyNewYear.textContent = `До нового года осталось ${roadToHny()} ${wordDays()}`
     }
-    logMessage()
+    setInterval(logMessage, 1000)
 }
 message()
