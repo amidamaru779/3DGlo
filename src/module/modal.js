@@ -4,28 +4,28 @@ const modal = () => {
     const closeBtn = modal.querySelector('.popup-close')
     const modalContent = modal.querySelector('.popup-content')
 
+    let count = 0
+    let idInterval
+
     const openAnimatePopup = () => {
         const mobile = window.innerWidth < 768
         if (!mobile) {
-            modalContent.style.opacity = 0
-            modalContent.style.transform = 'scale(0.8)'
-            modal.style.display = 'block'
-            requestAnimationFrame(() => {
-                modalContent.style.transition = 'opacity 0.3s, transform 0.3s';
-                modalContent.style.opacity = 1
-                modalContent.style.transform = 'scale(1)'
-            });
+            count++
+            idInterval = requestAnimationFrame(openAnimatePopup)
+
+            if (count < 200) {
+                modalContent.style.opacity = count / 200
+                modal.style.display = 'block'
+            } else {
+                cancelAnimationFrame(idInterval)
+                count = 0
+            }
         } else {
             modal.style.display = 'block'
         }
     }
     const closeAnimationPopup = () => {
-        modalContent.style.transition = 'opacity 0.5s, transform 0.5s'
-        modalContent.style.opacity = 0
-        modalContent.style.transform = 'scale(0.8)'
-        setTimeout(() => {
-            modal.style.display = 'none'
-        }, 500)
+        modal.style.display = 'none'
     }
     buttons.forEach(btn => {
         btn.addEventListener('click', openAnimatePopup);
