@@ -10,25 +10,26 @@ const modal = () => {
     const openAnimatePopup = () => {
         const mobile = window.innerWidth < 768
         if (!mobile) {
-            count++
-            idInterval = requestAnimationFrame(openAnimatePopup)
 
-            if (count < 200) {
-                modalContent.style.opacity = count / 200
-                modal.style.display = 'block'
+            if (count <= 1) {
+                idInterval = requestAnimationFrame(openAnimatePopup)
+                count += 0.05
+                modalContent.style.opacity = count
             } else {
                 cancelAnimationFrame(idInterval)
                 count = 0
             }
-        } else {
-            modal.style.display = 'block'
         }
     }
     const closeAnimationPopup = () => {
         modal.style.display = 'none'
     }
     buttons.forEach(btn => {
-        btn.addEventListener('click', openAnimatePopup);
+        btn.addEventListener('click', () => {
+            modal.style.display = 'block'
+            openAnimatePopup()
+        });
+
     })
     closeBtn.addEventListener('click', closeAnimationPopup)
 }
