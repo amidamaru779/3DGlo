@@ -5,6 +5,7 @@ import calculator from './module/calculator'
 import forms from './module/forms'
 import tabs from './module/tabs'
 import slider from './module/slider'
+import calc from './module/calc'
 
 timer('26 september 2024 12:45:00')
 menu()
@@ -13,4 +14,4 @@ calculator()
 forms()
 tabs()
 slider()
-calc()
+calc(100)
