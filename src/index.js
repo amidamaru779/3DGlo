@@ -4,6 +4,7 @@ import modal from './module/modal'
 import calculator from './module/calculator'
 import forms from './module/forms'
 import tabs from './module/tabs'
+import slider from './module/slider'
 
 timer('26 september 2024 12:45:00')
 menu()
@@ -11,3 +12,4 @@ modal()
 calculator()
 forms()
 tabs()
+slider()
