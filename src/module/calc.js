@@ -5,6 +5,7 @@ const calc = (price = 100) => {
     const calcSquare = document.querySelector('.calc-square')
     const calcCount = document.querySelector('.calc-count')
     const calcDay = document.querySelector('.calc-day')
+
     const total = document.getElementById('total')
 
     const countCalc = () => {
@@ -18,17 +19,20 @@ const calc = (price = 100) => {
         if (calcCount.value > 1) {
             countCalcValue += +calcCount.value / 10
         }
+
         if (calcDay.value && calcDay.value < 5) {
             calcDayValue = 2
         } else if (calcDay.value && calcDay.value < 10) {
             calcDayValue = 1.5
         }
+
         if (calcType.value && calcSquare.value) {
             totalValue = price * calcTypeValue * calcSquareValue *
                 countCalcValue * calcDayValue
         } else {
             totalValue = 0
         }
+
         total.textContent = totalValue
 
     }

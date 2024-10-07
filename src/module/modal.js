@@ -1,40 +1,55 @@
+import { animate } from "./helpers"
+
 const modal = () => {
-    const modal = document.querySelector('.popup')
-    const buttons = document.querySelectorAll('.popup-btn')
-    const modalContent = modal.querySelector('.popup-content')
+    const modal = document.querySelector(".popup")
+    const popupButton = document.querySelectorAll(".popup-btn")
+    const popupClose = modal.querySelector(".popup-close")
 
-    let count = 0
-    let idInterval
-
-    const openAnimatePopup = () => {
-        const mobile = window.innerWidth < 768
-        if (!mobile) {
-
-            if (count <= 1) {
-                idInterval = requestAnimationFrame(openAnimatePopup)
-                count += 0.05
-                modalContent.style.opacity = count
-            } else {
-                cancelAnimationFrame(idInterval)
-                count = 0
-            }
-        }
-    }
-    const closeAnimationPopup = () => {
-        modal.style.display = 'none'
-    }
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            modal.style.display = 'block'
-            openAnimatePopup()
+    const animatedModal = (toggle, opacity) => {
+        modal.style.opacity = opacity
+        animate({
+            duration: 400,
+            timing(timeFraction) {
+                return timeFraction
+            },
+            draw(progress) {
+                if (toggle === "block") {
+                    modal.style.display = toggle
+                    modal.style.opacity = opacity + progress
+                } else {
+                    modal.style.opacity = opacity - progress
+                    if (modal.style.opacity <= 0) {
+                        modal.style.display = toggle
+                    }
+                }
+            },
         });
+    };
 
-    })
-    modal.addEventListener('click', (e) => {
-        if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
-            closeAnimationPopup()
-        }
+    const eventAnimatedModal = (toggle) => {
+        toggle == "block" ? animatedModal(toggle, 0) : animatedModal(toggle, 1)
+    };
 
-    })
-}
+    const eventNoAnimatedModal = (toggle) => {
+        modal.style.display = toggle
+        toggle == "block" ? (modal.style.opacity = 1) : (modal.style.opacity = 0)
+    };
+
+    const eventModal = (toggle) => {
+        window.outerWidth >= 768 ? eventAnimatedModal(toggle) : eventNoAnimatedModal(toggle)
+    };
+
+    popupButton.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            e.preventDefault()
+            eventModal("block")
+        });
+    });
+
+    popupClose.addEventListener("click", (e) => {
+        e.preventDefault()
+        eventModal("none")
+    });
+};
+
 export default modal
