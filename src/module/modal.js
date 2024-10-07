@@ -1,7 +1,6 @@
 const modal = () => {
     const modal = document.querySelector('.popup')
     const buttons = document.querySelectorAll('.popup-btn')
-    const closeBtn = modal.querySelector('.popup-close')
     const modalContent = modal.querySelector('.popup-content')
 
     let count = 0
@@ -31,6 +30,11 @@ const modal = () => {
         });
 
     })
-    closeBtn.addEventListener('click', closeAnimationPopup)
+    modal.addEventListener('click', (e) => {
+        if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+            closeAnimationPopup()
+        }
+
+    })
 }
 export default modal
