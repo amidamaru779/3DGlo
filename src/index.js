@@ -6,6 +6,7 @@ import forms from './module/forms'
 import tabs from './module/tabs'
 import slider from './module/slider'
 import calc from './module/calc'
+import sendForm from './module/sendForm'
 
 timer('26 september 2024 12:45:00')
 menu()
@@ -15,3 +16,4 @@ forms()
 tabs()
 slider()
 calc(100)
+sendForm('form1')
