@@ -13,6 +13,8 @@ const menu = () => {
             if (e.target.closest(".menu") || e.target.closest(".close-btn") || e.target.closest("ul>li>a")) {
                 handlMenu();
             } else if (!e.target.closest('.active-menu')) {
+                console.log(e.target);
+                
                 handlMenu();
             }
         });
