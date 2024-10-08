@@ -8,7 +8,7 @@ const menu = () => {
 
     const toggleMenu = () => {
         body.addEventListener("click", (e) => {
-            console.dir(e.target);
+            console.log(e.target);
             
             if (e.target.closest(".menu") || e.target.closest(".close-btn") || e.target.closest("ul>li>a")) {
                 handlMenu();
