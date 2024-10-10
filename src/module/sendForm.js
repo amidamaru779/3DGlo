@@ -15,10 +15,10 @@ const sendForm = ({
         const value = input.value
 
         if (name === 'user_phone') {
-            // Разрешаются только цифры, "+", "(", ")", "-"
+
             return /^[0-9+\-\(\) ]*$/.test(value)
         } else if (name === 'user_name') {
-            // Разрешаются только кириллица и пробелы
+
             return /^[А-Яа-яЁё\s]*$/.test(value)
         } else if (name === 'user_message') {
             return /^[А-Яа-яЁё0-9\.,!?;:\s]*$/.test(value)
