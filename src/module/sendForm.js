@@ -21,7 +21,7 @@ const sendForm = ({
     const createStatusBlock = (form) => {
         const statusBlock = document.createElement("div");
         statusBlock.classList.add("status");
-        statusBlock.style.color = "red";
+        statusBlock.style.color = "white";
         form.append(statusBlock);
     };
 
