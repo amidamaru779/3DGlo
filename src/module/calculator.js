@@ -4,8 +4,8 @@ const calculator = () => {
     const dueDate = document.querySelector('.calc-item.calc-day')
 
     const regExpCals = /\D+/
-    const eventInputs = () => {
 
+    const eventInputs = () => {
 
         area.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(regExpCals, "")

@@ -1,7 +1,7 @@
 const forms = () => {
-    const regExpName = /^[-?!,.а-яА-ЯёЁ]{2,}$/
+    const regExpName = /^[а-яА-ЯёЁ\s]+$/
     const regExpEmail = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/
-    const regExpPhone = /(\+7|8)[\s(]?(\d{3})[\s)]?(\d{3})[\s-]?(\d{2})[\s-]?(\d{2})/g
+    const regExpPhone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
     const reExpMessage = /^[-?!,.а-яА-ЯёЁ\s]/
 
     const userName = document.querySelectorAll('.form-name')
@@ -9,19 +9,25 @@ const forms = () => {
     const userPhone = document.querySelectorAll('.form-phone')
     const userMessage = document.querySelector(".mess")
 
-
     const isUserDataValid = (regExp, data) => {
         return regExp.test(data)
     }
+
     const userValid = () => {
 
         userName.forEach(item => {
             item.addEventListener('input', (e) => {
                 e.preventDefault()
+
                 if (isUserDataValid(regExpName, item.value)) {
                     item.classList.add('success')
+                    item.setCustomValidity('')
+                } else if (item.value.trim() === "") {
+                    item.classList.remove('success')
+                    item.setCustomValidity('Заполните это поле')
                 } else {
                     item.classList.remove('success')
+                    item.setCustomValidity('Введите только кириллицу.')
                 }
             })
         })
@@ -29,14 +35,17 @@ const forms = () => {
         userEmail.forEach(item => {
             item.addEventListener('input', (e) => {
                 e.preventDefault()
-                if (item.value.trim() === '') {
-                    item.setCustomValidity('Заполните это поле');
-                    item.classList.remove('success');
-                } else if (isUserDataValid(regExpEmail, item.value)) {
-                    item.setCustomValidity('');
+
+                if (isUserDataValid(regExpEmail, item.value)) {
                     item.classList.add('success');
-                } else {
+                    item.setCustomValidity('');
+                } else if (item.value.trim() === "") {
                     item.classList.remove('success');
+                    item.setCustomValidity('Заполните это поле')
+                } else {
+                    item.classList.remove('success')
+                    item.setCustomValidity(`Адрес электронной почты должен содержать символ "@". В адресе "${item.value}" отсутствует символ "@"`)
+                    item.setCustomValidity('')
                 }
             })
         })
@@ -44,25 +53,36 @@ const forms = () => {
         userPhone.forEach(item => {
             item.addEventListener('input', (e) => {
                 e.preventDefault()
+
                 if (isUserDataValid(regExpPhone, item.value)) {
                     item.classList.add('success')
-                } else {
+                    item.setCustomValidity('')
+                } else if (item.value.trim() === "") {
                     item.classList.remove('success')
+                    item.setCustomValidity('Заполните поле')
+                } else {
+                    item.setCustomValidity('Используйте цифры, "+","()","-"')
+                    item.classList.remove('success')
+
                 }
             })
         })
         userMessage.addEventListener('input', (e) => {
             e.preventDefault()
+
             if (isUserDataValid(reExpMessage, userMessage.value)) {
                 userMessage.classList.add('success')
+                userMessage.setCustomValidity('')
+            } else if (userMessage.value.trim() === "") {
+                userMessage.classList.remove('success')
+                userMessage.setCustomValidity('Пожалуйста оставьте обратную связь =)')
             } else {
                 userMessage.classList.remove('success')
+                userMessage.setCustomValidity('Можно использовать кириллицу, цифры и знаки препинания.')
             }
         })
     }
     userValid()
 }
-
-
 
 export default forms;

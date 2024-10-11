@@ -27,7 +27,7 @@ sendForm({
     formId: "form2",
     someElem: [{
         type: "input",
-        id: "form2-message",
+        id: "total",
     }]
 });
 sendForm({

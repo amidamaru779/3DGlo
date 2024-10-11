@@ -27,14 +27,13 @@ const calc = (price = 100) => {
         }
 
         if (calcType.value && calcSquare.value) {
-            totalValue = price * calcTypeValue * calcSquareValue *
-                countCalcValue * calcDayValue
+            totalValue = Math.round(price * calcTypeValue * calcSquareValue *
+                countCalcValue * calcDayValue)
         } else {
             totalValue = 0
         }
 
         total.textContent = totalValue
-
     }
 
     calcBlock.addEventListener('input', (e) => {

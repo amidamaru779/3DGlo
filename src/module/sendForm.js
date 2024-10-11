@@ -28,7 +28,7 @@ const sendForm = ({
     const validate = (list) => {
         let success = true;
         list.forEach((input) => {
-            console.log(input.value, input.classList.contains("success"))
+
             if (!input.classList.contains("success")) {
                 success = false;
             }
@@ -67,9 +67,6 @@ const sendForm = ({
         });
 
         const formElements = form.querySelectorAll("input");
-        console.log(formElements);
-
-
 
         if (validate(formElements)) {
             sendData(formBody)
